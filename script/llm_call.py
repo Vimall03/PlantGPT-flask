@@ -15,7 +15,7 @@ def llm_call(query):
     class DummyModel(RootModel):
       root: dict
 
-    model = ChatGroq(temperature=0, groq_api_key=MODEL_NAME, model_name=GROQ_API_KEY)
+    model = ChatGroq(temperature=0, groq_api_key=GROQ_API_KEY, model_name=MODEL_NAME)
     parser_json = JsonOutputParser(pydantic_object=DummyModel)
     prompt = PromptTemplate(
       template="Answer the user query.\n{format_instructions}\n{query}\n",
