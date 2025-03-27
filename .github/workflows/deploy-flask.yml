@@ -22,4 +22,4 @@ jobs:
         run: |
           docker stop plant-gpt-flask || true
           docker rm plant-gpt-flask || true
-          docker run -d --name plant-gpt-flask -p 0.0.0.0:5000:5000 -e GROQ_API_KEY="$GROQ_API_KEY" -e MODEL_NAME="$MODEL_NAME" plant-gpt-flask:latest
+          docker run -d --name plant-gpt-flask -p 5000:5000 -e GROQ_API_KEY="$GROQ_API_KEY" -e MODEL_NAME="$MODEL_NAME" plant-gpt-flask:latest
