@@ -1,3 +1,4 @@
+# Description: This script is used to call the LLM model to get the summary of the environmental data.
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_groq import ChatGroq
