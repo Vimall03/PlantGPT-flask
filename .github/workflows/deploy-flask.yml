@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build Docker image
-        run: docker buildx build --platform linux/amd64 -t plant-gpt-flask:latest .
+        run: docker build -t plant-gpt-flask:latest .
 
       - name: Deploy Flask App
         env:
