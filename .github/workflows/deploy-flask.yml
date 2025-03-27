@@ -1,0 +1,25 @@
+name: Deploy Flask App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker buildx build --platform linux/amd64 -t plant-gpt-flask:latest .
+
+      - name: Deploy Flask App
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MODEL_NAME: ${{ secrets.MODEL_NAME }}
+        run: |
+          docker stop plant-gpt-flask || true
+          docker rm plant-gpt-flask || true
+          docker run -d --name plant-gpt-flask -p 5000:5000 -e GROQ_API_KEY="$GROQ_API_KEY" -e MODEL_NAME="$MODEL_NAME" plant-gpt-flask:latest
