@@ -13,3 +13,4 @@ dnspython>=2.7.0
 pypandoc==1.15
 pyppeteer==2.0.0
 langchain-groq==0.3.1
+tensorflow==2.18.0
