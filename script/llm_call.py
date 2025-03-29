@@ -32,22 +32,22 @@ def llm_call(query):
 def get_summary(humidity, temperature, voc_levels, ppm_levels, time_frame):
   query = f"""As an environmental data analyst expert in plant health, assess sensor data averaged over {time_frame} from a forest:
 
-Humidity (%): {humidity}
-Temperature (°C): {temperature}
-VOC (ppm): {voc_levels}
-PPM (ppm): {ppm_levels}
+Humidity (%): {humidity} (in percentage)
+Temperature (°C): {temperature} 
+VOC (%): {voc_levels} (in percentage)
+PPM (ppm): {ppm_levels} (0 to 1000)
 
 Tasks:
 1. Evaluate plant health (thriving, stable, stressed, declining).
 2. Check risks:
-   - Mold: VOC > 100, humidity > 80%, 25°C-35°C
-   - Drying: Humidity < 30%, temperature > 30°C
-   - Poor Air: VOC > 150, PPM > 200
-   - Cold Stress: Temperature < 10°C, humidity > 70%
-   - Root Rot: Humidity > 90% (prolonged)
+  Mold Risk: VOC > 100 ppm, humidity > 70%, temperature between 20°C and 35°C.
+  Drying Risk: Humidity < 30%, temperature > 30°C.
+  Poor Air Quality Risk: VOC > 15%, PPM > 200.
+  Cold Stress Risk: Temperature < 10°C, humidity > 70%.
+  Root Rot Risk: Humidity > 90% (assume prolonged exposure if sustained over the {time_frame})
 3. Return JSON:
-   No risks: {{"overall_health": "<50-60 word assessment as a report>", "risks": "False"}} //Clearly mention that are no potential risks are found in the overall_health.
-   Risks: {{"overall_health": "<50-60 word assessment as a report>", "risks": "True", "recommendations": "<45-50 word recommendation practical for a forest manager>"}} //Clearly mention that are risks are found in the overall_health.
+   No risks: {{"overall_health": "<100 words assessment as a report, detailed description of the environment based on the data>", "risks": "False"}} //Clearly mention that are no potential risks are found in the overall_health.
+   Risks: {{"overall_health": "<100 words assessment as a report, detailed description of the environment based on the data>", "risks": "True", "recommendations": "<100 words recommendation practical for a forest manager>"}} //Clearly mention that are risks are found in the overall_health.
 
 Recommendation Example: Increase ground cover to retain moisture. Monitor water-stressed zones, Consider implementing measures to reduce temperature and VOC levels, Monitor the situation closely
    """
